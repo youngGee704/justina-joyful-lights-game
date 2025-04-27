@@ -39,7 +39,8 @@ const Game = () => {
       
       <footer className="bg-white/20 backdrop-blur-sm py-4 mt-auto">
         <div className="container mx-auto px-4 text-center text-gray-800">
-          <p className="font-montserrat">Made with 💖 for Justina</p>
+          <p className="font-montserrat">Made with 💖 for Justina by Your bro. Goodness</p>
+          <p className="font-montserrat text-sm mt-1">Powered by GRIDVEM</p>
         </div>
       </footer>
     </div>

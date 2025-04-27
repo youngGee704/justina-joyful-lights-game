@@ -103,19 +103,56 @@
   }
 }
 
-.card-back {
+/* Card flip animations */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
   backface-visibility: hidden;
+}
+
+.rotate-y-180 {
   transform: rotateY(180deg);
 }
 
-.card-front {
-  backface-visibility: hidden;
+/* Animation classes */
+@keyframes confetti-fall {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-.card.flipped .card-front {
-  transform: rotateY(180deg);
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-.card.flipped .card-back {
-  transform: rotateY(0);
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall 3s linear forwards;
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s infinite ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s infinite ease-in-out;
 }

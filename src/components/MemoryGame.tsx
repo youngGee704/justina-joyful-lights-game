@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, Cake, Gift, Trophy, Star, PartyPopper, Award, Bell } from 'lucide-react';
+import { Heart, Cake, Gift, Diamond, Bell, PartyPopper, Users, DiamondPlus } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import Confetti from './Confetti';
 
@@ -19,10 +19,10 @@ const generateCards = () => {
     { type: 'heart', icon: <Heart size={40} className="text-pink-500" /> },
     { type: 'cake', icon: <Cake size={40} className="text-purple-500" /> },
     { type: 'gift', icon: <Gift size={40} className="text-blue-500" /> },
-    { type: 'trophy', icon: <Trophy size={40} className="text-yellow-500" /> },
-    { type: 'star', icon: <Star size={40} className="text-amber-500" /> },
+    { type: 'users', icon: <Users size={40} className="text-yellow-500" /> },
+    { type: 'diamond', icon: <Diamond size={40} className="text-amber-500" /> },
     { type: 'party', icon: <PartyPopper size={40} className="text-green-500" /> },
-    { type: 'award', icon: <Award size={40} className="text-red-500" /> },
+    { type: 'diamondplus', icon: <DiamondPlus size={40} className="text-red-500" /> },
     { type: 'bell', icon: <Bell size={40} className="text-indigo-500" /> },
   ];
 
@@ -44,6 +44,16 @@ const MemoryGame: React.FC = () => {
   const [moves, setMoves] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Simulate loading time to ensure cards are properly initialized
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (matchedPairs === 8) {
@@ -104,6 +114,14 @@ const MemoryGame: React.FC = () => {
     setShowConfetti(false);
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-celebration-purple"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto p-4">
       {showConfetti && <Confetti />}
@@ -119,24 +137,29 @@ const MemoryGame: React.FC = () => {
         </Button>
       </div>
       
-      <div className="grid grid-cols-4 md:grid-cols-4 gap-3 perspective-1000">
+      <div className="grid grid-cols-4 gap-3">
         {cards.map((card) => (
           <div 
             key={card.id} 
-            className={`cursor-pointer h-24 md:h-32 transition-transform duration-500 transform-style-preserve-3d ${card.isFlipped ? 'rotate-y-180' : ''}`}
+            className={`cursor-pointer h-24 md:h-32 perspective-1000`}
             onClick={() => handleCardClick(card.id)}
           >
-            <Card className={`h-full w-full flex items-center justify-center absolute inset-0 ${card.isMatched ? 'opacity-60' : ''}`}>
-              {card.isFlipped ? (
-                <div className="flex items-center justify-center h-full">
-                  {card.icon}
-                </div>
-              ) : (
-                <div className="bg-gradient-to-r from-celebration-pink to-celebration-purple h-full w-full flex items-center justify-center">
-                  <span className="text-3xl font-pacifico text-white">J</span>
-                </div>
-              )}
-            </Card>
+            <div className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d ${card.isFlipped ? 'rotate-y-180' : ''}`}>
+              <div className="absolute w-full h-full backface-hidden">
+                <Card className={`h-full w-full flex items-center justify-center ${card.isMatched ? 'opacity-60' : ''}`}>
+                  <div className="bg-gradient-to-r from-celebration-pink to-celebration-purple h-full w-full flex items-center justify-center">
+                    <span className="text-3xl font-pacifico text-white">J</span>
+                  </div>
+                </Card>
+              </div>
+              <div className="absolute w-full h-full backface-hidden rotate-y-180">
+                <Card className={`h-full w-full flex items-center justify-center ${card.isMatched ? 'opacity-60' : ''}`}>
+                  <div className="flex items-center justify-center h-full w-full">
+                    {card.icon}
+                  </div>
+                </Card>
+              </div>
+            </div>
           </div>
         ))}
       </div>

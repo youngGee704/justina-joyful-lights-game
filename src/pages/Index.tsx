@@ -82,23 +82,35 @@ const Index = () => {
                     With love and best wishes,
                   </p>
                   <p className="font-pacifico text-xl text-celebration-purple mt-1">
-                    Your Cousin
+                    Your bro. Goodness
                   </p>
                 </CardContent>
               </Card>
               
               <Card className="bg-white/90 backdrop-blur-sm shadow-xl border-0">
                 <CardContent className="p-6 h-full flex flex-col">
-                  <h2 className="text-2xl font-pacifico text-celebration-purple mb-4">Celebration Time!</h2>
+                  <h2 className="text-2xl font-pacifico text-celebration-purple mb-4">Celebration Games!</h2>
                   <p className="text-lg font-montserrat mb-6">
-                    I've created a special memory matching game just for you! Can you match all the wedding-themed pairs?
+                    I've created some fun marriage-themed games just for you! Enjoy these special games to celebrate your new journey.
                   </p>
-                  <div className="mt-auto">
+                  <div className="grid grid-cols-1 gap-3 mt-auto">
                     <Button 
                       onClick={handlePlayGame}
                       className="w-full bg-gradient-to-r from-celebration-purple to-celebration-pink hover:opacity-90 text-white font-medium text-lg py-6"
                     >
-                      Play the Memory Game
+                      Play Memory Game
+                    </Button>
+                    <Button 
+                      onClick={() => navigate('/love-quiz')}
+                      className="w-full bg-gradient-to-r from-celebration-gold to-celebration-pink hover:opacity-90 text-white font-medium text-lg py-6"
+                    >
+                      Marriage Quiz
+                    </Button>
+                    <Button 
+                      onClick={() => navigate('/word-scramble')}
+                      className="w-full bg-gradient-to-r from-celebration-blue to-celebration-purple hover:opacity-90 text-white font-medium text-lg py-6"
+                    >
+                      Wedding Word Scramble
                     </Button>
                   </div>
                 </CardContent>
@@ -134,7 +146,8 @@ const Index = () => {
       
       <footer className="bg-white/20 backdrop-blur-sm py-4 mt-10">
         <div className="container mx-auto px-4 text-center text-white">
-          <p className="font-montserrat">Made with 💖 for Justina</p>
+          <p className="font-montserrat">Made with 💖 for Justina by Your bro. Goodness</p>
+          <p className="font-montserrat text-sm mt-1">Powered by GRIDVEM</p>
         </div>
       </footer>
     </div>

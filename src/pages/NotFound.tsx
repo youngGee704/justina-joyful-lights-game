@@ -28,6 +28,8 @@ const NotFound = () => {
         >
           Back to Celebration
         </Button>
+        <p className="font-montserrat text-sm mt-8 text-gray-500">Made with 💖 for Justina by Your bro. Goodness</p>
+        <p className="font-montserrat text-xs mt-1 text-gray-400">Powered by GRIDVEM</p>
       </div>
     </div>
   );
